@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verloft Studio — Сайты для любого бизнеса на заказ</title>
+    <meta name="description" content="Создаю быстрые и современные сайты для вашего бизнеса под ключ за 7 дней. Без ежемесячных платежей.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'accent': {
+                            DEFAULT: '#6366f1',
+                            light: '#818cf8',
+                            dark: '#4f46e5',
+                        },
+                        'dark': {
+                            900: '#0a0a0f',
+                            800: '#12121a',
+                            700: '#1a1a24',
+                            600: '#24242f',
+                        },
+                        'vk': '#0077FF',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.6s ease-out forwards',
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12121a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6366f1;
+            border-radius: 4px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #6366f1 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+        
+        .glow-accent {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+        }
+        
+        .glow-accent-sm {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(99, 102, 241, 0.04) 0%, transparent 40%);
+        }
+        
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .vk-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .vk-btn:hover {
+            background-color: #0077FF;
+            transform: scale(1.05);
+        }
+        
+        .vk-btn:hover svg {
+            fill: white;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-white antialiased">
+    
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="#" class="flex items-center space-x-2 group">
+                    <div class="w-9 h-9 md:w-10 md:h-10 bg-gradient-to-br from-accent to-purple-500 rounded-xl flex items-center justify-center glow-accent-sm group-hover:scale-105 transition-transform">
+                        <i data-lucide="code-2" class="w-5 h-5 md:w-6 md:h-6 text-white"></i>
+                    </div>
+                    <span class="text-lg md:text-xl font-bold">Verloft Studio</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#advantages" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Преимущества</a>
+                    <a href="#order" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Заказать</a>
+                    <a href="#contacts" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Контакты</a>
+                </div>
+                
+                <a href="#order" class="hidden md:inline-flex items-center px-5 py-2.5 bg-accent hover:bg-accent-dark rounded-full text-sm font-semibold transition-all hover:scale-105">
+                    Рассчитать стоимость
+                </a>
+                
+                <button id="menuBtn" class="md:hidden p-2 text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-40 bg-dark-900/98 backdrop-blur-xl md:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#advantages" class="text-2xl font-semibold text-gray-300 hover:text-white transition-colors mobile-link">Преимущества</a>
+            <a href="#order" class="text-2xl font-semibold text-gray-300 hover:text-white transition-colors mobile-link">Заказать</a>
+            <a href="#contacts" class="text-2xl font-semibold text-gray-300 hover:text-white transition-colors mobile-link">Контакты</a>
+            <a href="#order" class="mt-4 px-8 py-4 bg-accent rounded-full text-lg font-semibold mobile-link">Рассчитать стоимость</a>
+        </div>
+        <button id="closeMenuBtn" class="absolute top-5 right-5 p-2 text-gray-400 hover:text-white">
+            <i data-lucide="x" class="w-7 h-7"></i>
+        </button>
+    </div>
+    
+    <section class="relative min-h-screen flex items-center bg-pattern overflow-hidden pt-16 md:pt-20">
+        <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 left-0 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+        
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="reveal inline-flex items-center px-4 py-2 bg-dark-700/50 border border-white/10 rounded-full mb-6 md:mb-8">
+                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                    <span class="text-sm text-gray-400">Свободен для новых проектов</span>
+                </div>
+                
+                <h1 class="reveal reveal-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 md:mb-8">
+                    Сайт, который<br>
+                    <span class="gradient-text">приводит клиентов</span><br>
+                    <span class="text-gray-400 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">а не просто висит в поиске</span>
+                </h1>
+                
+                <p class="reveal reveal-delay-2 text-lg sm:text-xl md:text-2xl text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Создаю быстрые и современные сайты для вашего бизнеса <span class="text-white font-semibold">под ключ за 7 дней</span>
+                </p>
+                
+                <div class="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#order" class="btn-primary w-full sm:w-auto px-8 py-4 bg-accent hover:bg-accent-dark rounded-full text-lg font-semibold glow-accent transition-all hover:scale-105 flex items-center justify-center gap-2">
+                        <span>Рассчитать стоимость</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#advantages" class="w-full sm:w-auto px-8 py-4 bg-dark-700 hover:bg-dark-600 border border-white/10 rounded-full text-lg font-semibold transition-all flex items-center justify-center gap-2">
+                        <span>Узнать больше</span>
+                    </a>
+                </div>
+                
+                <div class="reveal reveal-delay-4 mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-6 md:gap-10 text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                        <span>Фиксированная цена</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                        <span>Без скрытых платежей</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                        <span>Гарантия результата</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-600"></i>
+        </div>
+    </section>
+    
+    <section id="advantages" class="relative py-20 md:py-32 bg-dark-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-20">
+                <span class="reveal inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-4">Преимущества</span>
+                <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+                    Почему выбирают <span class="gradient-text">меня</span>
+                </h2>
+                <p class="reveal reveal-delay-2 text-lg text-gray-400 max-w-2xl mx-auto">
+                    Получите профессиональный сайт без головной боли и переплат
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="reveal feature-card bg-dark-700/50 border border-white/5 rounded-2xl p-6 md:p-8 hover:border-accent/30">
+                    <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-7 h-7 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Готово за 7 дней</h3>
+                    <p class="text-gray-400 leading-relaxed">Не месяцы ожидания, а чёткий срок. Ваш бизнес не будет ждать — сайт начнёт работать уже через неделю.</p>
+                </div>
+                
+                <div class="reveal reveal-delay-1 feature-card bg-dark-700/50 border border-white/5 rounded-2xl p-6 md:p-8 hover:border-accent/30">
+                    <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="globe" class="w-7 h-7 text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Работает без VPN</h3>
+                    <p class="text-gray-400 leading-relaxed">Размещение на надёжных серверах в РФ. Ваши клиенты откроют сайт мгновенно, без блокировок и задержек.</p>
+                </div>
+                
+                <div class="reveal reveal-delay-2 feature-card bg-dark-700/50 border border-white/5 rounded-2xl p-6 md:p-8 hover:border-accent/30">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="wallet" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Без абонентской платы</h3>
+                    <p class="text-gray-400 leading-relaxed">Заплатили один раз — и сайт ваш навсегда. Никаких ежемесячных подписок и скрытых платежей.</p>
+                </div>
+                
+                <div class="reveal reveal-delay-3 feature-card bg-dark-700/50 border border-white/5 rounded-2xl p-6 md:p-8 hover:border-accent/30">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="smartphone" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mobile First</h3>
+                    <p class="text-gray-400 leading-relaxed">80% ваших клиентов смотрят со смартфона. Сайт будет идеально выглядеть на любом устройстве.</p>
+                </div>
+            </div>
+            
+            <div class="reveal mt-12 md:mt-16 bg-gradient-to-r from-accent/10 to-purple-500/10 border border-white/5 rounded-2xl p-6 md:p-10">
+                <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-4">
+                        <div class="w-12 h-12 bg-dark-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="message-square" class="w-6 h-6 text-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1">Прямое общение</h4>
+                            <p class="text-sm text-gray-400">Без менеджеров и посредников — работаете напрямую со мной</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-4">
+                        <div class="w-12 h-12 bg-dark-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1">30 дней поддержки</h4>
+                            <p class="text-sm text-gray-400">Бесплатные правки и помощь после запуска сайта</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-4">
+                        <div class="w-12 h-12 bg-dark-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1">SEO-оптимизация</h4>
+                            <p class="text-sm text-gray-400">Сайт виден в поисковиках с первого дня</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="order" class="relative py-20 md:py-32 bg-pattern overflow-hidden">
+        <div class="absolute top-0 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+        
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div>
+                    <span class="reveal inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-4">Начать проект</span>
+                    <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Расскажите о своём <span class="gradient-text">бизнесе</span>
+                    </h2>
+                    <p class="reveal reveal-delay-2 text-lg text-gray-400 mb-8 leading-relaxed">
+                        Заполните короткую форму, и я свяжусь с вами в течение 2 часов, чтобы обсудить ваш проект и рассчитать точную стоимость.
+                    </p>
+                    
+                    <div class="reveal reveal-delay-3 space-y-4">
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="clock" class="w-5 h-5 text-accent"></i>
+                            <span>Отвечу в течение 2 часов</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="lock" class="w-5 h-5 text-accent"></i>
+                            <span>Ваши данные в безопасности</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="heart-handshake" class="w-5 h-5 text-accent"></i>
+                            <span>Консультация бесплатно</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <form 
+                        action="https://formsubmit.co/verloft100@yandex.com" 
+                        method="POST"
+                        class="bg-dark-800/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 glow-accent-sm"
+                        id="orderForm"
+                    >
+                        <input type="hidden" name="_subject" value="Новая заявка с сайта Verloft Studio">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="">
+                        
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">
+                                Ваше имя или название бизнеса
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required
+                                placeholder="Например: Иван или Кафе «Уют»"
+                                class="form-input w-full px-5 py-4 bg-dark-700 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-all"
+                            >
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="siteType" class="block text-sm font-medium text-gray-300 mb-2">
+                                Какой сайт вам нужен?
+                            </label>
+                            <div class="relative">
+                                <select 
+                                    id="siteType" 
+                                    name="site_type" 
+                                    required
+                                    class="form-input w-full px-5 py-4 bg-dark-700 border border-white/10 rounded-xl text-white focus:outline-none focus:border-accent transition-all appearance-none cursor-pointer"
+                                >
+                                    <option value="" disabled selected>Выберите тип сайта</option>
+                                    <option value="Сайт-визитка">Сайт-визитка</option>
+                                    <option value="Лендинг">Лендинг (продающая страница)</option>
+                                    <option value="Меню для кафе/ресторана">Меню для кафе/ресторана</option>
+                                    <option value="Каталог товаров/услуг">Каталог товаров/услуг</option>
+                                    <option value="Другое">Другое</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="contact" class="block text-sm font-medium text-gray-300 mb-2">
+                                Как с вами связаться?
+                            </label>
+                            <input 
+                                type="text" 
+                                id="contact" 
+                                name="contact" 
+                                required
+                                placeholder="Ссылка на ВК или телефон"
+                                class="form-input w-full px-5 py-4 bg-dark-700 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-all"
+                            >
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label for="description" class="block text-sm font-medium text-gray-300 mb-2">
+                                Расскажите о задаче <span class="text-gray-500">(необязательно)</span>
+                            </label>
+                            <textarea 
+                                id="description" 
+                                name="description" 
+                                rows="4"
+                                placeholder="Чем занимаетесь, что хотите показать на сайте, есть ли примеры, которые нравятся..."
+                                class="form-input w-full px-5 py-4 bg-dark-700 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-accent transition-all resize-none"
+                            ></textarea>
+                        </div>
+                        
+                        <button 
+                            type="submit"
+                            class="btn-primary w-full py-4 bg-accent hover:bg-accent-dark rounded-xl text-lg font-semibold transition-all flex items-center justify-center gap-2 group"
+                        >
+                            <span>Отправить заявку</span>
+                            <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                        
+                        <p class="mt-4 text-center text-sm text-gray-500">
+                            Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contacts" class="bg-dark-800 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
+                <div class="lg:col-span-2">
+                    <a href="#" class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-accent to-purple-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="code-2" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">Verloft Studio</span>
+                    </a>
+                    <p class="text-gray-400 mb-6 max-w-sm leading-relaxed">
+                        Создаю современные сайты для малого бизнеса. Быстро, качественно и без переплат.
+                    </p>
+                    <a href="https://vk.com/im?sel=1095658527" target="_blank" class="vk-btn inline-flex items-center justify-center w-12 h-12 bg-dark-700 rounded-xl">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#0077FF" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.77 19.15c-7.08 0-11.12-4.85-11.27-12.9h3.54c.1 5.9 2.72 8.4 4.78 8.92V6.25h3.34v5.1c2.04-.22 4.18-2.54 4.9-5.1h3.34c-.55 3.15-2.86 5.47-4.5 6.43 1.64.77 4.26 2.8 5.26 6.47h-3.68c-.78-2.43-2.72-4.3-5.32-4.56v4.56h-.4z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Навигация</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#advantages" class="text-gray-400 hover:text-white transition-colors">Преимущества</a></li>
+                        <li><a href="#order" class="text-gray-400 hover:text-white transition-colors">Заказать сайт</a></li>
+                        <li><a href="#contacts" class="text-gray-400 hover:text-white transition-colors">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Контакты</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="https://vk.com/im?sel=1095658527" target="_blank" class="flex items-center gap-2 text-gray-400 hover:text-vk transition-colors">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.77 19.15c-7.08 0-11.12-4.85-11.27-12.9h3.54c.1 5.9 2.72 8.4 4.78 8.92V6.25h3.34v5.1c2.04-.22 4.18-2.54 4.9-5.1h3.34c-.55 3.15-2.86 5.47-4.5 6.43 1.64.77 4.26 2.8 5.26 6.47h-3.68c-.78-2.43-2.72-4.3-5.32-4.56v4.56h-.4z"/>
+                                </svg>
+                                <span>Написать в ВК</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-2 text-gray-400">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            <span>Работаю удалённо</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    © 2026 Verloft Studio. Все права защищены.
+                </p>
+                <p class="text-gray-500 text-sm">
+                    Сделано с <span class="text-red-400">♥</span> для вашего бизнеса
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-dark-900/90 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-dark-800 border border-white/10 rounded-3xl p-8 md:p-12 max-w-md w-full text-center transform scale-95 opacity-0 transition-all duration-300" id="modalContent">
+            <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="check-circle" class="w-10 h-10 text-green-400"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">Заявка отправлена!</h3>
+            <p class="text-gray-400 mb-6">Спасибо за интерес! Я свяжусь с вами в ближайшее время для обсуждения проекта.</p>
+            <button onclick="closeModal()" class="px-8 py-3 bg-accent hover:bg-accent-dark rounded-xl font-semibold transition-all">
+                Отлично!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        const navbar = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark-900/95');
+            } else {
+                navbar.classList.remove('bg-dark-900/95');
+            }
+        });
+        
+        function showModal() {
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            lucide.createIcons();
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('modalContent');
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.animate-float');
+            
+            parallaxElements.forEach((el, index) => {
+                const speed = 0.05 + (index * 0.02);
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
